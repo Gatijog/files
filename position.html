@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Position Activity</title>
+    <style>
+        body {
+            font-family: Arial;
+            height: 1500px; /* for scrolling */
+            margin: 0;
+        }
+
+        /* Static (default) */
+        .box1 {
+            background-color: lightgray;
+            padding: 15px;
+        }
+
+        /* Relative */
+        .box2 {
+            position: relative;
+            top: 20px;
+            left: 30px;
+            background-color: lightblue;
+            padding: 15px;
+            width: 200px;
+        }
+
+        /* Absolute inside relative */
+        .container {
+            position: relative;
+            margin: 50px;
+            padding: 40px;
+            border: 2px solid black;
+        }
+
+        .box3 {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: yellow;
+            padding: 10px;
+        }
+
+        /* Fixed */
+        .box4 {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            padding: 10px;
+        }
+
+        /* Sticky */
+        .box5 {
+            position: sticky;
+            top: 0;
+            background-color: green;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box5">Sticky Header</div>
+
+<div class="box1">Static Box (Default Position)</div>
+
+<div class="box2">Relative Box (Moved Down and Right)</div>
+
+<div class="container">
+    Container (Relative Parent)
+    <div class="box3">Absolute Box</div>
+</div>
+
+<div class="box4">Fixed Box</div>
+
+</body>
+</html>
