@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid · Book-Style Guide</title>
+  <style>
+    /* --------------------------------------
+      BOOK STYLE RESET & TYPOGRAPHY
+    --------------------------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e8e2d4;  /* aged paper background */
+      font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+      color: #2c2418;
+      line-height: 1.55;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* main book container */
+    .book {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fffdf9;
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(180, 150, 110, 0.2);
+      border-radius: 8px;
+      padding: 2.8rem 2.5rem 3.5rem 2.5rem;
+      transition: all 0.2s;
+    }
+
+    /* decorative chapter header */
+    .chapter-header {
+      border-bottom: 3px double #c0a16b;
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .chapter-number {
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #b97f44;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 500;
+    }
+
+    .chapter-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #3a2c1f;
+      margin: 0.25rem 0 0.2rem 0;
+      letter-spacing: -0.5px;
+    }
+
+    .chapter-sub {
+      font-style: italic;
+      color: #6b5a44;
+      font-size: 1rem;
+    }
+
+    /* section styling (like book sections) */
+    .section {
+      margin: 2rem 0 2.2rem 0;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 600;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #4a3922;
+      border-left: 5px solid #c0a16b;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .subsection {
+      margin: 1.2rem 0 1.2rem 1rem;
+    }
+
+    .grid-definition {
+      background: #f8f3e8;
+      padding: 1.2rem 1.8rem;
+      border-radius: 20px;
+      margin: 1rem 0;
+      border-left: 8px solid #b98f5a;
+    }
+
+    .grid-definition p {
+      font-size: 1.1rem;
+    }
+
+    .emph-bullet {
+      font-weight: 600;
+      color: #a6582c;
+    }
+
+    .note-icon {
+      font-size: 1.2rem;
+      margin-right: 6px;
+    }
+
+    /* code blocks (elegant) */
+    .code-block {
+      background: #1e2a2a;
+      color: #e9e2c7;
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.9rem;
+      padding: 1rem 1.3rem;
+      border-radius: 14px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      box-shadow: inset 0 0 0 1px #3e4a4a, 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .code-block code {
+      font-family: inherit;
+      background: none;
+      color: #f3e5ab;
+    }
+
+    /* demo grid containers */
+    .demo-container {
+      margin: 1.4rem 0;
+      border-radius: 24px;
+      background: #f3efE6;
+      padding: 0.8rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    /* basic grid: 3 columns 1fr */
+    .grid-demo-basic {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .box {
+      background: #b68b5c;
+      color: white;
+      font-weight: 600;
+      font-size: 1.3rem;
+      font-family: system-ui, sans-serif;
+      padding: 1.2rem;
+      text-align: center;
+      border-radius: 14px;
+      transition: all 0.15s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .box:hover {
+      background: #9b6e42;
+      transform: scale(0.98);
+    }
+
+    /* rows demo (explicit rows) */
+    .grid-rows-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 100px 100px;
+      gap: 12px;
+    }
+
+    .grid-rows-demo .box {
+      background: #6f8f6b;
+    }
+
+    /* spanned item demo */
+    .grid-span-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .span-item {
+      background: #c08552;
+    }
+
+    .span-item:first-child {
+      grid-column: 1 / 3;
+      background: #ad6b35;
+    }
+
+    /* feature list (when to use grid) */
+    .use-grid-list {
+      background: #f6efe3;
+      padding: 1.4rem 2rem;
+      border-radius: 28px;
+      list-style-type: none;
+      margin: 1rem 0;
+    }
+
+    .use-grid-list li {
+      margin: 0.7rem 0;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .use-grid-list li::before {
+      content: "📐";
+      font-size: 1.2rem;
+    }
+
+    hr.divider {
+      margin: 2rem 0 1rem;
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, #e2d5c0, transparent);
+    }
+
+    /* page numbers like a real book */
+    .book-footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aa9a82;
+      border-top: 1px solid #e6ddcf;
+      padding-top: 1.5rem;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 700px) {
+      .book {
+        padding: 1.5rem;
+      }
+      .chapter-header h1 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.4rem;
+      }
+    }
+
+    /* additional fine print */
+    .small-note {
+      font-size: 0.85rem;
+      color: #7f6b51;
+      margin-top: 8px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+<div class="book">
+  <!-- 3. CSS Grid - Chapter header -->
+  <div class="chapter-header">
+    <div class="chapter-number">UNIT 4 — LAYOUT</div>
+    <h1>Grid</h1>
+    <div class="chapter-sub">Two-dimensional layout mastery · rows & columns reimagined</div>
+  </div>
+
+  <!-- 3.1 What is Grid? -->
+  <div class="section">
+    <div class="section-title">§ 3.1 — What is Grid?</div>
+    <div class="grid-definition">
+      <p><span class="emph-bullet">Grid</span> is a powerful CSS layout system used to arrange elements in <strong>rows AND columns simultaneously</strong>.</p>
+      <p style="margin-top: 8px;">👉 <em>Think of Grid like a sophisticated table layout — but far more flexible for modern web design.</em></p>
+      <div class="small-note" style="margin-top: 12px;">🔹 Unlike Flexbox (one-dimensional), Grid handles both axes with ease.</div>
+    </div>
+  </div>
+
+  <!-- 3.2 Basic Setup -->
+  <div class="section">
+    <div class="section-title">§ 3.2 — Basic Setup</div>
+    <div class="code-block">
+      <code>.container {<br>
+      &nbsp;&nbsp;display: grid;<br>
+      }</code>
+    </div>
+    <p class="small-note">→ Turning an element into a grid container unlocks grid properties for its direct children (grid items).</p>
+  </div>
+
+  <!-- 3.3 Creating Columns -->
+  <div class="section">
+    <div class="section-title">§ 3.3 — Creating Columns</div>
+    <div class="code-block">
+      <code>grid-template-columns: 1fr 1fr 1fr;</code>
+    </div>
+    <p>👉 <strong>This creates 3 equal columns</strong> using the <code>fr</code> unit (fractional unit). The available space is divided equally.</p>
+    <div class="demo-container">
+      <div class="grid-demo-basic">
+        <div class="box">A</div>
+        <div class="box">B</div>
+        <div class="box">C</div>
+      </div>
+      <div class="small-note" style="margin-top: 8px;">⬆️ Live example: three columns, each 1fr wide, with gap applied below (gap:10px).</div>
+    </div>
+    <div class="code-block">
+      <code>/* other examples: */<br>
+      grid-template-columns: 200px 1fr 2fr;  /* mixed units */<br>
+      grid-template-columns: repeat(4, 1fr); /* shorthand for 4 columns */</code>
+    </div>
+  </div>
+
+  <!-- 3.4 Creating Rows -->
+  <div class="section">
+    <div class="section-title">§ 3.4 — Creating Rows</div>
+    <div class="code-block">
+      <code>grid-template-rows: 100px 100px;</code>
+    </div>
+    <p>Explicitly defines the height of rows. In this case: two rows, each <strong>100px tall</strong>. Items will fill into these row tracks automatically.</p>
+    <div class="demo-container">
+      <div class="grid-rows-demo">
+        <div class="box">Row 1 → A</div>
+        <div class="box">Row 1 → B</div>
+        <div class="box">Row 2 → C</div>
+        <div class="box">Row 2 → D</div>
+      </div>
+      <div class="small-note">🔸 Notice explicit 100px row height. Great for dashboards or strict vertical rhythm.</div>
+    </div>
+  </div>
+
+  <!-- 3.5 Spacing Between Items (gap) -->
+  <div class="section">
+    <div class="section-title">§ 3.5 — Spacing Between Items</div>
+    <div class="code-block">
+      <code>gap: 10px;</code>
+    </div>
+    <p>Sets both <strong>row-gap</strong> and <strong>column-gap</strong> in one declaration. You can also use <code>column-gap</code> and <code>row-gap</code> individually.</p>
+    <div class="demo-container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; background: #e7dfd2; padding: 12px; border-radius: 20px;">
+        <div class="box" style="background:#a07e58;">gap:20px</div>
+        <div class="box" style="background:#a07e58;">between rows</div>
+        <div class="box" style="background:#a07e58;">& column gap</div>
+        <div class="box" style="background:#a07e58;">visible spacing</div>
+      </div>
+      <div class="small-note">⬆️ Example uses <code>gap: 20px 12px</code> (row-gap 20px, column-gap 12px). The classic <code>gap:10px</code> gives uniform spacing.</div>
+    </div>
+  </div>
+
+  <!-- 3.6 Example (full basic demo) -->
+  <div class="section">
+    <div class="section-title">§ 3.6 — Complete Example</div>
+    <div class="code-block">
+      <code>&lt;div class="container"&gt;<br>
+      &nbsp;&nbsp;&lt;div class="box"&gt;A&lt;/div&gt;<br>
+      &nbsp;&nbsp;&lt;div class="box"&gt;B&lt;/div&gt;<br>
+      &nbsp;&nbsp;&lt;div class="box"&gt;C&lt;/div&gt;<br>
+      &lt;/div&gt;<br><br>
+      .container {<br>
+      &nbsp;&nbsp;display: grid;<br>
+      &nbsp;&nbsp;grid-template-columns: 1fr 1fr 1fr;<br>
+      &nbsp;&nbsp;gap: 10px;<br>
+      }<br>
+      .box {<br>
+      &nbsp;&nbsp;background: gray;<br>
+      &nbsp;&nbsp;padding: 20px;<br>
+      }</code>
+    </div>
+    <div class="demo-container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+        <div style="background: #8f6a42; color: white; padding: 20px; text-align: center; border-radius: 14px; font-weight: bold;">A</div>
+        <div style="background: #8f6a42; color: white; padding: 20px; text-align: center; border-radius: 14px; font-weight: bold;">B</div>
+        <div style="background: #8f6a42; color: white; padding: 20px; text-align: center; border-radius: 14px; font-weight: bold;">C</div>
+      </div>
+      <div class="small-note">📘 Classic implementation: three responsive columns with gray boxes and inner padding.</div>
+    </div>
+  </div>
+
+  <!-- 3.7 Making an Item Bigger (spanning) -->
+  <div class="section">
+    <div class="section-title">§ 3.7 — Making an Item Bigger (Spanning Columns)</div>
+    <div class="code-block">
+      <code>.box1 {<br>
+      &nbsp;&nbsp;grid-column: 1 / 3;<br>
+      }</code>
+    </div>
+    <p>👉 <strong>This makes the item span across columns 1 through 3</strong> (column line 1 to line 3). The item will occupy two column tracks. Perfect for hero elements or featured content.</p>
+    <div class="demo-container">
+      <div class="grid-span-demo">
+        <div class="box span-item">Featured item (spans col 1 to 3)</div>
+        <div class="box span-item">Item 2</div>
+        <div class="box span-item">Item 3</div>
+      </div>
+      <div class="small-note">⭐ The first box uses <code>grid-column: 1 / 3;</code> → expands across 2 columns, while remaining items auto-place into the next grid cells.</div>
+    </div>
+    <div class="code-block">
+      <code>/* additional spanning examples */<br>
+      .item { grid-column: 2 / 4; }   /* span from column line 2 to 4 */<br>
+      .item { grid-row: 1 / 3; }      /* span rows as well */<br>
+      .hero { grid-column: 1 / -1; }  /* span all columns */</code>
+    </div>
+  </div>
+
+  <!-- 3.8 When to Use Grid -->
+  <div class="section">
+    <div class="section-title">§ 3.8 — When to Use Grid</div>
+    <div class="grid-definition" style="background: #f2ebdf;">
+      <p style="font-weight: 600; font-size: 1.1rem;">🎯 Use CSS Grid when:</p>
+      <ul class="use-grid-list" style="margin-top: 12px; background: transparent; padding-left: 0;">
+        <li>🏛️ <strong>You are designing a whole page</strong> — macro layouts, magazine-style, application shell</li>
+        <li>🧩 <strong>You need rows and columns simultaneously</strong> — both dimensions controlled at once</li>
+        <li>📐 <strong>You want a structured layout</strong> — precise alignment, overlapping zones, asymmetric grids</li>
+      </ul>
+      <p style="margin-top: 10px;">✨ <em>Pro tip: Use Grid for page skeleton (header, sidebar, main, footer) and Flexbox for inner components. Together they’re unbeatable.</em></p>
+    </div>
+    <!-- additional real-world inspiration -->
+    <div class="demo-container" style="margin-top: 20px;">
+      <p style="font-weight: 500; margin-bottom: 12px; font-family: system-ui;">📖 <strong>Classic Page Layout with Grid</strong> (concept preview)</p>
+      <div style="display: grid; grid-template-columns: 240px 1fr; grid-template-rows: auto 1fr auto; gap: 12px; background: #e3d9cd; border-radius: 20px; padding: 12px;">
+        <div style="background: #bc9a6c; padding: 12px; border-radius: 12px; color: white; text-align: center;">Header (span both)</div>
+        <div style="background: #a27b52; padding: 12px; border-radius: 12px; color: white;">Sidebar</div>
+        <div style="background: #8b623f; padding: 20px; border-radius: 12px; color: white;">Main Content — structured columns inside or flex</div>
+        <div style="background: #bc9a6c; padding: 12px; border-radius: 12px; color: white; grid-column: 1/-1;">Footer</div>
+      </div>
+      <div class="small-note">⬆️ Grid naturally creates robust page structures. The example uses <code>grid-template-rows: auto 1fr auto</code> for sticky footer behavior.</div>
+    </div>
+  </div>
+
+  <!-- additional reference: recap table (elegant) -->
+  <hr class="divider">
+  <div style="margin: 1rem 0 0.5rem;">
+    <p style="font-size: 1.1rem; font-weight: 500; font-family: system-ui, sans-serif;">📚 Grid Quick Reference — key properties</p>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: space-between; margin-top: 0.5rem;">
+    <div style="flex: 1; min-width: 180px; background: #f5efe6; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">grid-template-columns</span><br>
+      <span style="font-size: 0.85rem;">defines number & width of columns</span>
+    </div>
+    <div style="flex: 1; min-width: 180px; background: #f5efe6; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">grid-template-rows</span><br>
+      <span style="font-size: 0.85rem;">explicit row heights</span>
+    </div>
+    <div style="flex: 1; min-width: 180px; background: #f5efe6; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">gap / grid-gap</span><br>
+      <span style="font-size: 0.85rem;">gutter between items</span>
+    </div>
+    <div style="flex: 1; min-width: 180px; background: #f5efe6; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">grid-column / grid-row</span><br>
+      <span style="font-size: 0.85rem;">item spanning & placement</span>
+    </div>
+  </div>
+
+  <!-- final note: structured layout advice -->
+  <div class="book-footer">
+    <span>✦ CSS Grid — two-dimensional mastery ✦ &nbsp;|&nbsp; page 3 — complete reference &nbsp;|&nbsp; responsive, robust, intuitive</span>
+  </div>
+</div>
+</body>
+</html>

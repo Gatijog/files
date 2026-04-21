@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox · Book-Style Guide</title>
+  <style>
+    /* --------------------------------------
+      BOOK STYLE RESET & ELEGANT TYPOGRAPHY
+    --------------------------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f0;  /* soft sage paper background */
+      font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+      color: #2c3a2b;
+      line-height: 1.55;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* main book container */
+    .book {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fffef8;
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(150, 130, 100, 0.15);
+      border-radius: 8px;
+      padding: 2.8rem 2.5rem 3.5rem 2.5rem;
+      transition: all 0.2s;
+    }
+
+    /* decorative chapter header */
+    .chapter-header {
+      border-bottom: 3px double #9bba8f;
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .chapter-number {
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6f8f6b;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 500;
+    }
+
+    .chapter-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #2d4a2a;
+      margin: 0.25rem 0 0.2rem 0;
+      letter-spacing: -0.5px;
+    }
+
+    .chapter-sub {
+      font-style: italic;
+      color: #6e7f64;
+      font-size: 1rem;
+    }
+
+    /* section styling (like book sections) */
+    .section {
+      margin: 2rem 0 2.2rem 0;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 600;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #3d5a37;
+      border-left: 5px solid #9bba8f;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .subsection {
+      margin: 1.2rem 0 1.2rem 1rem;
+    }
+
+    .definition-card {
+      background: #f5f9f0;
+      padding: 1.2rem 1.8rem;
+      border-radius: 20px;
+      margin: 1rem 0;
+      border-left: 8px solid #89b07c;
+    }
+
+    .definition-card p {
+      font-size: 1.1rem;
+    }
+
+    .emph-bullet {
+      font-weight: 600;
+      color: #527a48;
+    }
+
+    .note-icon {
+      font-size: 1.2rem;
+      margin-right: 6px;
+    }
+
+    /* code blocks (elegant dark) */
+    .code-block {
+      background: #1e2a24;
+      color: #e9efdb;
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.9rem;
+      padding: 1rem 1.3rem;
+      border-radius: 14px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      box-shadow: inset 0 0 0 1px #3c5340, 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .code-block code {
+      font-family: inherit;
+      background: none;
+      color: #e3f0cf;
+    }
+
+    /* demo containers */
+    .demo-container {
+      margin: 1.4rem 0;
+      border-radius: 24px;
+      background: #f6f7f2;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e2e6d8;
+    }
+
+    .demo-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: monospace;
+      color: #8a9a7a;
+      margin-bottom: 8px;
+    }
+
+    /* flexbox demo boxes */
+    .flex-demo {
+      display: flex;
+      background: #e7ede0;
+      border-radius: 20px;
+      padding: 1rem;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .flex-item {
+      background: #9bba8f;
+      color: #1e2a1c;
+      font-weight: 600;
+      font-size: 1.2rem;
+      font-family: system-ui, sans-serif;
+      padding: 1rem 1.2rem;
+      text-align: center;
+      border-radius: 14px;
+      transition: all 0.15s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .flex-item:hover {
+      background: #83a575;
+      transform: scale(0.97);
+    }
+
+    /* horizontal alignment variations */
+    .flex-row-example {
+      display: flex;
+      background: #e7ede0;
+      border-radius: 20px;
+      padding: 1rem;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .mini-box {
+      background: #7d9e6e;
+      color: white;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* alignment grid */
+    .align-demo {
+      display: flex;
+      background: #e7ede0;
+      border-radius: 20px;
+      padding: 1rem;
+      gap: 12px;
+      height: 130px;
+    }
+
+    /* equal flex items */
+    .equal-flex {
+      display: flex;
+      gap: 12px;
+    }
+    .equal-item {
+      flex: 1;
+      background: #8fae7c;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 14px;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* feature list */
+    .use-flex-list {
+      background: #f2f6ec;
+      padding: 1.4rem 2rem;
+      border-radius: 28px;
+      list-style-type: none;
+      margin: 1rem 0;
+    }
+
+    .use-flex-list li {
+      margin: 0.7rem 0;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .use-flex-list li::before {
+      content: "➡️";
+      font-size: 1.1rem;
+    }
+
+    hr.divider {
+      margin: 2rem 0 1rem;
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, #d4dfc6, transparent);
+    }
+
+    .book-footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9aab8a;
+      border-top: 1px solid #e0e8d4;
+      padding-top: 1.5rem;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+
+    .small-note {
+      font-size: 0.85rem;
+      color: #6c7e5e;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    @media (max-width: 700px) {
+      .book {
+        padding: 1.5rem;
+      }
+      .chapter-header h1 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="book">
+  <!-- Chapter 2: Flexbox header -->
+  <div class="chapter-header">
+    <div class="chapter-number">UNIT 4 — LAYOUT</div>
+    <h1>Flexbox</h1>
+    <div class="chapter-sub">Flexible Box Layout · one-dimensional precision & alignment</div>
+  </div>
+
+  <!-- 2.1 What is Flexbox? -->
+  <div class="section">
+    <div class="section-title">§ 2.1 — What is Flexbox?</div>
+    <div class="definition-card">
+      <p><span class="emph-bullet">Flexbox</span> is a layout module used to arrange elements in <strong>one direction only</strong>:</p>
+      <p style="margin-top: 8px;">🔹 Either <strong>row</strong> (horizontal) — left to right<br>
+      🔹 Or <strong>column</strong> (vertical) — top to bottom</p>
+      <p style="margin-top: 12px;">👉 <em>Think of Flexbox as arranging items in a straight line — like a flexible, responsive ribbon.</em></p>
+      <div class="small-note" style="margin-top: 8px;">✨ Perfect for UI components, navigation bars, card decks, and centering elements.</div>
+    </div>
+  </div>
+
+  <!-- 2.2 Basic Setup -->
+  <div class="section">
+    <div class="section-title">§ 2.2 — Basic Setup</div>
+    <div class="code-block">
+      <code>.container {<br>
+      &nbsp;&nbsp;display: flex;<br>
+      }</code>
+    </div>
+    <p><strong>The parent = flex container</strong> &nbsp;|&nbsp; <strong>The children = flex items</strong></p>
+    <div class="demo-container">
+      <div class="demo-label">▼ FLEX CONTAINER (parent) ▼</div>
+      <div class="flex-demo">
+        <div class="flex-item">Flex item 1</div>
+        <div class="flex-item">Flex item 2</div>
+        <div class="flex-item">Flex item 3</div>
+      </div>
+      <div class="small-note">→ All direct children automatically become flex items and align in a row by default.</div>
+    </div>
+  </div>
+
+  <!-- 2.3 Direction of Items -->
+  <div class="section">
+    <div class="section-title">§ 2.3 — Direction of Items</div>
+    <div class="code-block">
+      <code>flex-direction: row;     /* left to right (default) */<br>
+      flex-direction: column;  /* top to bottom */</code>
+    </div>
+    <p>👉 <strong>This controls how items are arranged</strong> — main axis changes accordingly.</p>
+    <div class="demo-container">
+      <div class="demo-label">flex-direction: row →</div>
+      <div style="display: flex; flex-direction: row; gap: 10px; background: #e7ede0; padding: 1rem; border-radius: 20px;">
+        <div class="mini-box">1</div><div class="mini-box">2</div><div class="mini-box">3</div>
+      </div>
+      <div class="demo-label" style="margin-top: 12px;">flex-direction: column ↓</div>
+      <div style="display: flex; flex-direction: column; gap: 8px; background: #e7ede0; padding: 1rem; border-radius: 20px; width: fit-content;">
+        <div class="mini-box">A</div><div class="mini-box">B</div><div class="mini-box">C</div>
+      </div>
+      <div class="small-note">Use <code>flex-direction</code> to switch between horizontal navbars and vertical sidebars.</div>
+    </div>
+  </div>
+
+  <!-- 2.4 Aligning Items (Very Important) -->
+  <div class="section">
+    <div class="section-title">§ 2.4 — Aligning Items <span style="font-size:0.9rem;">(Very Important)</span></div>
+    
+    <!-- a. Horizontal Alignment -->
+    <div class="subsection">
+      <h3 style="font-size:1.3rem; font-weight:600; margin-bottom:0.3rem; color:#4a6741;">a. Horizontal Alignment</h3>
+      <div class="code-block"><code>justify-content: center;</code></div>
+      <p>Other values:</p>
+      <ul style="margin-left: 1.8rem; margin-bottom: 0.8rem;">
+        <li><code>flex-start</code> → left (default)</li>
+        <li><code>flex-end</code> → right</li>
+        <li><code>space-between</code> → space in between items</li>
+        <li><code>space-around</code> → equal space around each item</li>
+        <li><code>space-evenly</code> → perfectly distributed gaps</li>
+      </ul>
+      <div class="demo-container">
+        <div class="demo-label">justify-content: center →</div>
+        <div style="display: flex; justify-content: center; gap: 12px; background:#e7ede0; padding: 1rem; border-radius: 20px;">
+          <div class="mini-box">A</div><div class="mini-box">B</div><div class="mini-box">C</div>
+        </div>
+        <div class="demo-label" style="margin-top: 10px;">justify-content: space-between →</div>
+        <div style="display: flex; justify-content: space-between; gap: 8px; background:#e7ede0; padding: 1rem; border-radius: 20px;">
+          <div class="mini-box">1</div><div class="mini-box">2</div><div class="mini-box">3</div>
+        </div>
+        <div class="demo-label" style="margin-top: 10px;">justify-content: flex-end →</div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; background:#e7ede0; padding: 1rem; border-radius: 20px;">
+          <div class="mini-box">X</div><div class="mini-box">Y</div>
+        </div>
+        <div class="small-note">🎯 <code>justify-content</code> aligns items along the <strong>main axis</strong> (row: horizontal, column: vertical).</div>
+      </div>
+    </div>
+
+    <!-- b. Vertical Alignment -->
+    <div class="subsection" style="margin-top: 1.8rem;">
+      <h3 style="font-size:1.3rem; font-weight:600; margin-bottom:0.3rem; color:#4a6741;">b. Vertical Alignment</h3>
+      <div class="code-block"><code>align-items: center;</code></div>
+      <p>Other values:</p>
+      <ul style="margin-left: 1.8rem; margin-bottom: 0.8rem;">
+        <li><code>flex-start</code> → top</li>
+        <li><code>flex-end</code> → bottom</li>
+        <li><code>stretch</code> → fill container height (default)</li>
+        <li><code>baseline</code> → align by text baseline</li>
+      </ul>
+      <div class="demo-container">
+        <div class="demo-label">align-items: center (vertical center)</div>
+        <div style="display: flex; align-items: center; gap: 12px; background:#e7ede0; padding: 1rem; height: 110px; border-radius: 20px;">
+          <div class="mini-box" style="height: 40px;">Item 1</div>
+          <div class="mini-box" style="height: 60px;">Item 2</div>
+          <div class="mini-box" style="height: 30px;">Item 3</div>
+        </div>
+        <div class="demo-label" style="margin-top: 10px;">align-items: flex-start (top)</div>
+        <div style="display: flex; align-items: flex-start; gap: 12px; background:#e7ede0; padding: 1rem; height: 110px; border-radius: 20px;">
+          <div class="mini-box" style="height: 40px;">Top</div>
+          <div class="mini-box" style="height: 60px;">Top2</div>
+        </div>
+        <div class="small-note">⚡ <code>align-items</code> controls alignment along the <strong>cross axis</strong> (perpendicular to flex-direction).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.5 Making Items Equal Size -->
+  <div class="section">
+    <div class="section-title">§ 2.5 — Making Items Equal Size</div>
+    <div class="code-block">
+      <code>.box {<br>
+      &nbsp;&nbsp;flex: 1;<br>
+      }</code>
+    </div>
+    <p>👉 <strong>All items will have equal width</strong> (or equal height if column direction). The <code>flex: 1</code> property distributes extra space equally.</p>
+    <div class="demo-container">
+      <div class="equal-flex">
+        <div class="equal-item">Equal 1</div>
+        <div class="equal-item">Equal 2</div>
+        <div class="equal-item">Equal 3</div>
+      </div>
+      <div class="small-note">🌟 Each item gets <code>flex: 1</code> → all take equal share of available space.</div>
+    </div>
+    <div class="code-block">
+      <code>/* Advanced: flex: 2  (twice the size) */<br>
+      .item-large { flex: 2; }<br>
+      .item-small { flex: 1; }</code>
+    </div>
+  </div>
+
+  <!-- 2.6 Simple Example -->
+  <div class="section">
+    <div class="section-title">§ 2.6 — Simple Example</div>
+    <div class="code-block">
+      <code>&lt;div class="container"&gt;<br>
+      &nbsp;&nbsp;&lt;div class="box"&gt;1&lt;/div&gt;<br>
+      &nbsp;&nbsp;&lt;div class="box"&gt;2&lt;/div&gt;<br>
+      &nbsp;&nbsp;&lt;div class="box"&gt;3&lt;/div&gt;<br>
+      &lt;/div&gt;<br><br>
+      .container {<br>
+      &nbsp;&nbsp;display: flex;<br>
+      &nbsp;&nbsp;justify-content: space-between;<br>
+      }<br>
+      .box {<br>
+      &nbsp;&nbsp;background: gray;<br>
+      &nbsp;&nbsp;padding: 20px;<br>
+      }</code>
+    </div>
+    <div class="demo-container">
+      <div style="display: flex; justify-content: space-between; background: #e2e8d8; padding: 1rem; border-radius: 20px;">
+        <div style="background: #9bba8f; padding: 20px; border-radius: 14px; font-weight: bold; color:#1f2e1a;">1</div>
+        <div style="background: #9bba8f; padding: 20px; border-radius: 14px; font-weight: bold; color:#1f2e1a;">2</div>
+        <div style="background: #9bba8f; padding: 20px; border-radius: 14px; font-weight: bold; color:#1f2e1a;">3</div>
+      </div>
+      <div class="small-note">📘 Classic Flexbox pattern: evenly spaced items using <code>justify-content: space-between</code>.</div>
+    </div>
+  </div>
+
+  <!-- 2.7 When to Use Flexbox -->
+  <div class="section">
+    <div class="section-title">§ 2.7 — When to Use Flexbox</div>
+    <div class="definition-card" style="background: #f0f5ea;">
+      <p style="font-weight: 600; font-size: 1.1rem;">🎯 Use Flexbox when:</p>
+      <ul class="use-flex-list" style="margin-top: 12px; background: transparent; padding-left: 0;">
+        <li>📏 <strong>You want items in a row (or column)</strong> — one-dimensional alignment</li>
+        <li>🎯 <strong>You want to center something</strong> — vertically + horizontally (with justify + align)</li>
+        <li>🍔 <strong>You are making menus or navigation</strong> — responsive navbars, tabs, toolbars</li>
+        <li>📦 <strong>Building card decks, form layouts, or action bars</strong> — distributing space dynamically</li>
+      </ul>
+      <p style="margin-top: 10px;">✨ <em>Pro insight: Flexbox is your go‑to for components; Grid is for overall page structure. Combine both for mastery.</em></p>
+    </div>
+    <!-- live navigation demo -->
+    <div class="demo-container" style="margin-top: 20px;">
+      <p style="font-weight: 500; margin-bottom: 8px; font-family: system-ui;">🍔 <strong>Real-world: Navigation Menu with Flexbox</strong></p>
+      <div style="display: flex; justify-content: space-between; align-items: center; background: #4a6741; padding: 0.8rem 1.5rem; border-radius: 60px; color: white;">
+        <span style="font-weight: bold;">✨ LOGO</span>
+        <div style="display: flex; gap: 1.5rem;">
+          <span>Home</span><span>Shop</span><span>About</span><span>Contact</span>
+        </div>
+        <span>👤 Account</span>
+      </div>
+      <div class="small-note">⬆️ Flexbox makes navigation bars fluid, centering elements and distributing links perfectly.</div>
+    </div>
+  </div>
+
+  <!-- quick reference summary -->
+  <hr class="divider">
+  <div style="margin: 1rem 0 0.5rem;">
+    <p style="font-size: 1.1rem; font-weight: 500; font-family: system-ui, sans-serif;">📖 Flexbox Quick Reference — core properties</p>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: space-between; margin-top: 0.5rem;">
+    <div style="flex: 1; min-width: 170px; background: #f1f5ec; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">display: flex</span><br>
+      <span style="font-size: 0.85rem;">activates flex container</span>
+    </div>
+    <div style="flex: 1; min-width: 170px; background: #f1f5ec; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">flex-direction</span><br>
+      <span style="font-size: 0.85rem;">row | column | row-reverse</span>
+    </div>
+    <div style="flex: 1; min-width: 170px; background: #f1f5ec; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">justify-content</span><br>
+      <span style="font-size: 0.85rem;">main-axis alignment</span>
+    </div>
+    <div style="flex: 1; min-width: 170px; background: #f1f5ec; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">align-items</span><br>
+      <span style="font-size: 0.85rem;">cross-axis alignment</span>
+    </div>
+    <div style="flex: 1; min-width: 170px; background: #f1f5ec; padding: 0.8rem; border-radius: 24px;">
+      <span style="font-weight: 700;">flex: 1</span><br>
+      <span style="font-size: 0.85rem;">equal distribution</span>
+    </div>
+  </div>
+
+  <div class="book-footer">
+    <span>✦ Flexbox — one-dimensional precision ✦ &nbsp;|&nbsp; chapter 2 — complete reference &nbsp;|&nbsp; perfect for components & navigation</span>
+  </div>
+</div>
+</body>
+</html>
